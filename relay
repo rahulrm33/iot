@@ -1,0 +1,101 @@
+#define LEDgreen 4 //Connect Digital Pin 4 on Arduino to Green LED (+ 330 ohm resistor) and then to "NO" terminal on relay module
+#define LEDyellow 12 //Connect Digital Pin 12 on Arduino to Yellow LED (+ 330 ohm resistor) and then to "NC" terminal on relay module
+
+void setup() {
+  //Setup all the Arduino Pins
+
+  pinMode(LEDgreen, OUTPUT);
+  pinMode(LEDyellow, OUTPUT);
+
+  //Provide power to both LEDs
+  digitalWrite(LEDgreen, HIGH);
+  digitalWrite(LEDyellow, HIGH);
+
+}
+
+void loop() {
+  digitalWrite(4, HIGH);  //Green LED on, Yellow LED off
+  delay(1000);
+  digitalWrite(4, LOW);   //Yellow LED on, Green LED off
+  delay(1000);
+  digitalWrite(12, HIGH);  //Relay 3 switches to NO
+  delay(1000);
+  digitalWrite(12, LOW);   //Relay 3 switches to NC
+  delay(1000);
+}
+
+
+int Relaypin= 3; 
+void setup() {
+pinMode(Relaypin, OUTPUT); 
+}
+void loop() {
+  digitalWrite(Relaypin, HIGH); 
+delay(1000); 
+digitalWrite(Relaypin, LOW); 
+delay(1000); 
+}
+
+
+
+import RPi.GPIO as GPIO
+import time
+ 
+# PIN connected to IN1
+relay_pin = 23
+ 
+# Set mode BCM
+GPIO.setmode(GPIO.BCM)
+ 
+#Type of PIN - output
+GPIO.setup(relay_pin,GPIO.OUT)
+ 
+try:
+        while True:
+                #set low
+                print ("Setting low - LAMP ON")
+                GPIO.output (relay_pin,GPIO.LOW)
+                time.sleep(2)
+                #set high
+                print ("Setting high - LAMP OFF")
+                GPIO.output (relay_pin, GPIO.HIGH)
+                time.sleep(2)
+except KeyboardInterrupt:
+        GPIO.cleanup()
+        print ("Bye")
+        
+        
+import RPi.GPIO as GPIO
+import time
+in1 = 16
+in2 = 18
+GPIO.setmode(GPIO.BOARD)
+GPIO.setup(in1, GPIO.OUT)
+GPIO.setup(in2, GPIO.OUT)
+GPIO.output(in1, False)
+GPIO.output(in2, False)
+try:
+    while True:
+      for x in range(5):
+            GPIO.output(in1, True)
+            time.sleep(0.1)
+            GPIO.output(in1, False)
+            GPIO.output(in2, True)
+            time.sleep(0.1)
+            GPIO.output(in2, False)
+      GPIO.output(in1,True)
+      GPIO.output(in2,True)
+      for x in range(4):
+            GPIO.output(in1, True)
+            time.sleep(0.05)
+            GPIO.output(in1, False)
+            time.sleep(0.05)
+      GPIO.output(in1,True)
+      for x in range(4):
+            GPIO.output(in2, True)
+            time.sleep(0.05)
+            GPIO.output(in2, False)
+            time.sleep(0.05)
+      GPIO.output(in2,True)
+except KeyboardInterrupt:
+    GPIO.cleanup()
