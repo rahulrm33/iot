@@ -99,3 +99,6 @@ try:
       GPIO.output(in2,True)
 except KeyboardInterrupt:
     GPIO.cleanup()
+    
+    
+https://www.notion.so/IOT-e6f3f1bdcaa74e96824b0e8e4e7b4b2b#0ed206d6456a4398b051dbc3a4548426
